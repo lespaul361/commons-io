@@ -14,4 +14,8 @@ public interface BKStream {
     public long size();
 
     public long getBytesRead();
+    
+    public void addBKStreamReadListener(BKStreamReadListener l);
+
+    public void removeBKStreamReadListener(BKStreamReadListener l);
 }

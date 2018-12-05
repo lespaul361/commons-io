@@ -11,6 +11,6 @@ import java.util.EventListener;
  *
  * @author lespa
  */
-public interface BKSteamListener extends EventListener{
-    
+public interface BKStreamReadListener extends EventListener{
+    public void bytesRead(BKStreamReadEvent evt);
 }
