@@ -5,23 +5,25 @@
  */
 package com.github.lespaul361.commons.io;
 
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.event.EventListenerList;
 
 /**
  *
  * @author lespa
  */
-class BKStreamImp implements BKStream {
+class BKStreamInImp implements BKStreamInput {
 
     protected long size;
     protected long bytesRead = 0;
     private EventListenerList events = new EventListenerList();
 
-    public BKStreamImp() {
+    public BKStreamInImp() {
 
     }
 
-    public BKStreamImp(long size) {
+    public BKStreamInImp(long size) {
         this.size = size;
     }
 
@@ -37,13 +39,23 @@ class BKStreamImp implements BKStream {
 
     protected void increaseByteRead(long bytesRead) {
         this.bytesRead += bytesRead;
+        fireStreamChange();
     }
 
-    public void addBKStreamReadListener(BKStreamReadListener l) {
-        events.add(BKStreamReadListener.class, l);
+    public void addBKStreamListener(BKStreamListener l) {
+        events.add(BKStreamListener.class, l);
     }
 
-    public void removeBKStreamReadListener(BKStreamReadListener l) {
-        events.remove(BKStreamReadListener.class, l);
+    public void removeBKStreamListener(BKStreamListener l) {
+        events.remove(BKStreamListener.class, l);
+    }
+
+    protected void fireStreamChange() {
+        BKStreamEvent evt = new BKStreamEvent(this, size, bytesRead);
+        List<BKStreamListener> listeners = Arrays.asList(events.getListeners(BKStreamListener.class));
+        for (BKStreamListener listener : listeners) {
+            listener.bytesRead(evt);
+        }
+
     }
 }

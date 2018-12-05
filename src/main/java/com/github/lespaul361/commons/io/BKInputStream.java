@@ -15,7 +15,7 @@ import javax.swing.event.EventListenerList;
  *
  * @author lespa
  */
-public abstract class BKInputStream extends InputStream implements BKStream {
+public abstract class BKInputStream extends InputStream implements BKStreamInput {
 
     private long size;
     private long bytesRead = 0;
@@ -58,12 +58,12 @@ public abstract class BKInputStream extends InputStream implements BKStream {
         this.bytesRead += byteCount;
     }
 
-    public void addBKStreamReadListener(BKStreamReadListener l) {
-        events.add(BKStreamReadListener.class, l);
+    public void addBKStreamListener(BKStreamListener l) {
+        events.add(BKStreamListener.class, l);
     }
 
-    public void removeBKStreamReadListener(BKStreamReadListener l) {
-        events.remove(BKStreamReadListener.class, l);
+    public void removeBKStreamListener(BKStreamListener l) {
+        events.remove(BKStreamListener.class, l);
     }
 
     @Override
@@ -77,9 +77,9 @@ public abstract class BKInputStream extends InputStream implements BKStream {
     }
 
     protected void fireStreamRead() {
-        BKStreamReadEvent evt = new BKStreamReadEvent(this, this.size, this.getBytesRead());
-        List<BKStreamReadListener> listeners = Arrays.asList(events.getListeners(BKStreamReadListener.class));
-        for (BKStreamReadListener l : listeners) {
+        BKStreamEvent evt = new BKStreamEvent(this, this.size, this.getBytesRead());
+        List<BKStreamListener> listeners = Arrays.asList(events.getListeners(BKStreamListener.class));
+        for (BKStreamListener l : listeners) {
             l.bytesRead(evt);
         }
     }

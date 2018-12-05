@@ -11,12 +11,12 @@ import java.util.EventObject;
  *
  * @author lespa
  */
-public class BKStreamReadEvent extends EventObject {
+public class BKStreamEvent extends EventObject {
 
     private final long streamSize;
     private final long currentLocation;
 
-    public BKStreamReadEvent(Object source, long streamSize, long currentLocation) {
+    public BKStreamEvent(Object source, long streamSize, long currentLocation) {
         super(source);
         this.streamSize = streamSize;
         this.currentLocation = currentLocation;

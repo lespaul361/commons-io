@@ -9,11 +9,6 @@ package com.github.lespaul361.commons.io;
  *
  * @author lespa
  */
-public interface BKStream {
-
-    public long size();
-
-    public void addBKStreamListener(BKStreamListener l);
-
-    public void removeBKStreamListener(BKStreamListener l);
+public interface BKStreamOutput extends BKStream{
+    public long getBytesWritten();
 }

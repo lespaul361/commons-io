@@ -5,15 +5,12 @@
  */
 package com.github.lespaul361.commons.io;
 
+import java.util.EventListener;
+
 /**
  *
  * @author lespa
  */
-public interface BKStream {
-
-    public long size();
-
-    public void addBKStreamListener(BKStreamListener l);
-
-    public void removeBKStreamListener(BKStreamListener l);
+public interface BKStreamListener extends EventListener{
+    public void bytesRead(BKStreamEvent evt);
 }

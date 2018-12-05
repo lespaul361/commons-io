@@ -15,9 +15,9 @@ import java.io.IOException;
  *
  * @author lespa
  */
-public class BKFileInputStream extends FileInputStream implements BKStream {
+public class BKFileInputStream extends FileInputStream implements BKStreamInput {
 
-    BKStreamImp streamImp = new BKStreamImp();
+    BKStreamInImp streamImp = new BKStreamInImp();
     
     public BKFileInputStream(String name) throws FileNotFoundException {
         super(new File(name));
@@ -75,12 +75,12 @@ public class BKFileInputStream extends FileInputStream implements BKStream {
     }
     
     @Override
-    public void addBKStreamReadListener(BKStreamReadListener l) {
-        streamImp.addBKStreamReadListener(l);
+    public void addBKStreamListener(BKStreamListener l) {
+        streamImp.addBKStreamListener(l);
     }
     
     @Override
-    public void removeBKStreamReadListener(BKStreamReadListener l) {
-        streamImp.removeBKStreamReadListener(l);
+    public void removeBKStreamListener(BKStreamListener l) {
+        streamImp.removeBKStreamListener(l);
     }
 }
